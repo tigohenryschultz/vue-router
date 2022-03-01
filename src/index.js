@@ -189,6 +189,22 @@ export default class VueRouter {
     }
   }
 
+  /**
+   * Find the first matching route path, go back x times to it
+   * @param route
+   * @returns {boolean|void}
+   */
+  goBackTo(route: Route) {
+    for (let i = this.history.stack.length; i >= 0; i--) {
+      let _route = this.history.stack[i];
+      if(route.path === path){
+        let diff = this.history.stack.length - i;
+        return this.go(diff);
+      }
+    }
+    return false;
+  }
+
   go (n: number) {
     this.history.go(n)
   }
